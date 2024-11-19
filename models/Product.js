@@ -13,7 +13,42 @@ class Product extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        // Otros atributos
+
+        pic: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
+            notNull: {
+              msg: "pic cannot be null",
+            },
+            notEmpty: { msg: "pic cannot be empty" },
+          },
+        },
+        description: {
+          type: DataTypes.TEXT,
+          allowNull: true,
+          validate: {
+            notEmpty: { msg: "description cannot be empty" },
+          },
+        },
+
+        stock: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+          validate: {
+            notEmpty: { msg: "description cannot be empty" },
+          },
+        },
+        price: {
+          type: DataTypes.JSON,
+          allowNull: false,
+          validate: {
+            notNull: {
+              msg: "price cannot be null",
+            },
+          },
+        },
+
         categoryId: {
           type: DataTypes.INTEGER,
           references: {
@@ -25,14 +60,11 @@ class Product extends Model {
       {
         sequelize,
         modelName: "Product",
-        tableName: "Products", // O el nombre que tengas
-        timestamps: false,
       }
     );
   }
 
   static associate(models) {
-    // Definir la asociación entre productos y categorías
     this.belongsTo(models.Category, { foreignKey: "categoryId" });
   }
 }
