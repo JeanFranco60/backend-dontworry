@@ -13,26 +13,27 @@ class Product extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        price: {
-          type: DataTypes.FLOAT,
-          allowNull: false,
-        },
+        // Otros atributos
         categoryId: {
           type: DataTypes.INTEGER,
-          allowNull: true,
           references: {
-            model: "Categories",
-            key: "id",
+            model: "Categories", // Tabla relacionada
+            key: "id", // Campo clave de la tabla relacionada
           },
         },
       },
       {
         sequelize,
         modelName: "Product",
-        tableName: "Products",
-        timestamps: true,
+        tableName: "Products", // O el nombre que tengas
+        timestamps: false,
       }
     );
+  }
+
+  static associate(models) {
+    // Definir la asociación entre productos y categorías
+    this.belongsTo(models.Category, { foreignKey: "categoryId" });
   }
 }
 

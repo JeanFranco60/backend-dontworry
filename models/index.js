@@ -17,8 +17,13 @@ const sequelize = new Sequelize(
   }
 );
 
+// Inicialización de los modelos
 Product.initModel(sequelize);
 Category.initModel(sequelize);
+
+// Definir las asociaciones
+Category.associate({ Product });
+Product.associate({ Category });
 
 module.exports = {
   sequelize,

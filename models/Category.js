@@ -18,9 +18,14 @@ class Category extends Model {
         sequelize,
         modelName: "Category",
         tableName: "Categories",
-        timestamps: false, // Cambia a false si no usas `createdAt` y `updatedAt`
+        timestamps: false,
       }
     );
+  }
+
+  static associate(models) {
+    // Definir la asociación inversa: una categoría tiene muchos productos
+    this.hasMany(models.Product, { foreignKey: "categoryId" });
   }
 }
 

@@ -100,5 +100,4 @@ const productController = {
     }
   },
 };
-
-module.exports = productController;
+module.exports = productController; // Asegúrate de exportar el controlador al final
