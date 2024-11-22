@@ -7,7 +7,8 @@ router.use("/products", productRoutes);
 router.use("/categories", categoryRoutes);
 
 router.use(function (req, res) {
-  res.status(404).json({ errors: ["Endpoint not found"] });
+  res.status(404).json({ errors: ["Endpoint not follund"] });
 });
+
 
 module.exports = router;

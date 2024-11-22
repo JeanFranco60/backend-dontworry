@@ -12,8 +12,8 @@ module.exports = async () => {
   const productList = [
     {
       id: 1,
-      name: "Collar de Cuero Elegante",
-      price: 79.99,
+      name: "Prueba base de datos",
+      price: 10.00,
       pic: "cadena1.jpg",
       categoryId: categoryMap["cuero"], // Coincide con la categoría "cuero"
       material: "cuero", // Material en minúsculas, coincide con el frontend
