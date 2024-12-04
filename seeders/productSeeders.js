@@ -8,30 +8,65 @@ module.exports = async () => {
     return map;
   }, {});
 
-  // Lista de productos para poblar la base de datos
+  // Lista de productos con descripciones y nombres únicos
   const productList = [
     {
       id: 1,
-      name: "Prueba base de datos",
-      price: 10.00,
+      name: "Collar 22",
+      description:
+        "Un collar elegante de cuero, perfecto para cualquier ocasión.",
+      price: 10.0,
       pic: "cadena1.jpg",
-      categoryId: categoryMap["cuero"], // Coincide con la categoría "cuero"
-      material: "cuero", // Material en minúsculas, coincide con el frontend
+      categoryId: categoryMap["cuero"],
+      material: "cuero",
     },
     {
       id: 2,
       name: "Cadena de Plata Fina",
+      description:
+        "Cadena de plata fina, ideal para combinar con otros accesorios.",
       price: 129.99,
       pic: "cadena2.jpg",
-      categoryId: categoryMap["metal"], // Coincide con la categoría "metal"
+      categoryId: categoryMap["metal"],
       material: "plata",
     },
     {
       id: 3,
       name: "Colgante de Ónix Negro",
+      description:
+        "Colgante con piedra ónix negra, muy resistente y sofisticado.",
       price: 89.99,
       pic: "cadena3.jpg",
-      categoryId: categoryMap["piedra"], // Coincide con la categoría "piedra"
+      categoryId: categoryMap["piedra"],
+      material: "ónix",
+    },
+    {
+      id: 4,
+      name: "Collar 22 - Edición Limitada", // Cambiado nombre para evitar duplicados
+      description:
+        "Versión exclusiva del collar de cuero, más ajustable y elegante.",
+      price: 10.0,
+      pic: "cadena1.jpg",
+      categoryId: categoryMap["cuero"],
+      material: "cuero",
+    },
+    {
+      id: 5,
+      name: "Cadena de Plata Fina - Exclusiva", // Cambiado nombre para evitar duplicados
+      description: "Cadena de plata exclusiva con un diseño único.",
+      price: 129.99,
+      pic: "cadena2.jpg",
+      categoryId: categoryMap["metal"],
+      material: "plata",
+    },
+    {
+      id: 6,
+      name: "Colgante de Ónix Negro - Edición Especial", // Cambiado nombre para evitar duplicados
+      description:
+        "Edición especial del colgante de ónix negro, con un diseño exclusivo.",
+      price: 89.99,
+      pic: "cadena3.jpg",
+      categoryId: categoryMap["piedra"],
       material: "ónix",
     },
   ];
