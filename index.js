@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const productRoutes = require("./routes/productRoutes"); // Asegúrate de que esta ruta exista y esté correctamente configurada
+// const productRoutes = require("./routes/productRoutes"); // Asegúrate de que esta ruta exista y esté correctamente configurada
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.use(cors()); // Configuración de CORS básica (puedes personalizarla si es 
 app.use(bodyParser.json()); // Procesar solicitudes con cuerpo JSON
 
 // Usar las rutas de productos
-app.use("/api/products", productRoutes); // Descomentar y asegurarse de que las rutas están funcionando
+// app.use("/api/products", productRoutes); // Descomentar y asegurarse de que las rutas están funcionando
 
 // Ruta base para probar que el servidor está activo
 app.get("/", (req, res) => {
