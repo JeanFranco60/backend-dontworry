@@ -1,6 +1,7 @@
 const { faker } = require("@faker-js/faker");
 const { User } = require("../models");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
+
 
 async function userSeeder() {
   const firstUser = {

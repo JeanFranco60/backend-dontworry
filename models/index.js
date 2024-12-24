@@ -1,51 +1,51 @@
 const { Sequelize } = require("sequelize");
 const Category = require("./Category");
 const Product = require("./Product");
+const Order = require("./Order");
+const User = require("./User");
 
-// Asegúrate de que la conexión esté bien configurada
+// Configuración de Sequelize
 const sequelizeOptions = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  dialect: process.env.DB_DIALECT, // Corregí esta línea para que coincida con la variable DB_DIALECT
+  dialect: process.env.DB_DIALECT,
   logging: false,
   define: {
-    timestamps: false, // No agregar automáticamente createdAt, updatedAt
+    timestamps: false,
   },
 };
 
-// Si la conexión es PostgreSQL, especifica el módulo de `pg`
 if (process.env.DB_DIALECT === "postgres") {
   sequelizeOptions.dialectModule = require("pg");
 }
 
-// Conexión con la base de datos
 const sequelize = new Sequelize(
-  process.env.DB_NAME, // Nombre de la base de datos
-  process.env.DB_USER, // Usuario de la base de datos
-  process.env.DB_PASSWORD, // Contraseña de la base de datos
-  sequelizeOptions // Usar las opciones definidas arriba
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  sequelizeOptions
 );
 
-// Verificar la conexión
+// Verificar conexión
 sequelize
   .authenticate()
-  .then(() => {
-    console.log("Conexión exitosa a la base de datos de Supabase");
-  })
-  .catch((error) => {
-    console.error("No se pudo conectar a la base de datos:", error);
-  });
+  .then(() => console.log("Conexión exitosa"))
+  .catch((error) => console.error("Error al conectar:", error));
 
-// Inicialización de los modelos
+// Inicializar modelos
 Product.initModel(sequelize);
 Category.initModel(sequelize);
+Order.initModel(sequelize);
+User.initModel(sequelize);
 
-// Definir las asociaciones entre los modelos
-Category.associate({ Product });
-Product.associate({ Category });
+// Asociaciones (si existen)
+if (Category.associate) Category.associate({ Product });
+if (Product.associate) Product.associate({ Category });
 
 module.exports = {
   sequelize,
   Product,
   Category,
+  Order,
+  User,
 };

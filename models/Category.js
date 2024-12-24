@@ -1,30 +1,21 @@
-const { DataTypes, Model } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 
 class Category extends Model {
   static initModel(sequelize) {
-    this.init(
+    Category.init(
       {
-        id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-        },
-        name: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
+        name: DataTypes.STRING,
       },
       {
         sequelize,
         modelName: "Category",
-        tableName: "Categories",
-        timestamps: false,
+        tableName: "categories",
       }
     );
   }
 
   static associate(models) {
-    // Definir la asociación inversa: una categoría tiene muchos productos
+    // Relación inversa, que se asocia a múltiples productos
     this.hasMany(models.Product, { foreignKey: "categoryId" });
   }
 }

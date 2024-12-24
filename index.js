@@ -1,18 +1,18 @@
-require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
 const app = express();
-const routes = require("./routes");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const productRoutes = require("./routes/products"); // Ruta de productos
 
-const PORT = process.env.PORT || 3000;
-
+// Middleware
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json()); // Para procesar el cuerpo de las solicitudes JSON
 
-app.use(routes);
+// Usar las rutas de productos
+app.use("/api/products", productRoutes);
 
+// Iniciar el servidor
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}.`);
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
-
-module.exports = app;
