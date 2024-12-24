@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -6,10 +7,9 @@ const productRoutes = require("./routes/products"); // Ruta de productos
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json()); // Para procesar el cuerpo de las solicitudes JSON
 
 // Usar las rutas de productos
-app.use("/api/products", productRoutes);
+// app.use("/api/products", productRoutes);
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;
