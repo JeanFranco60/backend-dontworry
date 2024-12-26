@@ -3,6 +3,7 @@ const productSeeder = require("./productSeeders");
 const categorySeeder = require("./categorySeeders");
 const userSeeder = require("./userSeeders");
 
+
 async function run() {
   try {
     // Ejecutar los seeders en paralelo si no importa el orden

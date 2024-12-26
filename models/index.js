@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { Sequelize } = require("sequelize");
 const Category = require("./Category");
 const Product = require("./Product");
