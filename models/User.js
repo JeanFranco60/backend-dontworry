@@ -32,6 +32,9 @@ class User extends Model {
         email: {
           type: DataTypes.STRING,
           allowNull: false,
+          unique: {
+            msg: "Email already in use",
+          },
           validate: {
             notNull: {
               msg: "email cannot be null",
@@ -39,6 +42,7 @@ class User extends Model {
             isEmail: { msg: "email must be valid" },
           },
         },
+
         address: {
           type: DataTypes.STRING,
           allowNull: false,

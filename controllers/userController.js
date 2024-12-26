@@ -22,12 +22,30 @@ const userController = {
     }
   },
   store: async (req, res) => {
-    const user = req.body;
+    const { email, password, confirmPassword } = req.body;
 
-    if (user.password) user.password = await bcrypt.hash(user.password, 10);
+    // Validaciones
+    if (!email || !password || !confirmPassword)
+      return res
+        .status(400)
+        .json({ user: null, errors: ["All fields are required"] });
+
+    if (password !== confirmPassword)
+      return res
+        .status(400)
+        .json({ user: null, errors: ["Passwords do not match"] });
+
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser)
+      return res
+        .status(400)
+        .json({ user: null, errors: ["Email already in use"] });
+
+    // Encriptar contraseña y crear usuario
+    if (password) user.password = await bcrypt.hash(password, 10);
 
     try {
-      const newUser = await User.create(user);
+      const newUser = await User.create(req.body);
       return res.status(201).json({ user: newUser });
     } catch (error) {
       return res
@@ -35,6 +53,7 @@ const userController = {
         .json({ user: null, errors: errorFormatter(error) });
     }
   },
+
   update: async (req, res) => {
     const { id } = req.params;
     const userInfo = req.body;
