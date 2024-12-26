@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 const Category = require("./Category");
 const Product = require("./Product");
+const User = require("./User");
 
 // Asegúrate de que la conexión esté bien configurada
 const sequelizeOptions = {
@@ -37,8 +38,9 @@ sequelize
   });
 
 // Inicialización de los modelos
-Product.initModel(sequelize);
 Category.initModel(sequelize);
+Product.initModel(sequelize);
+User.initModel(sequelize);
 
 // Definir las asociaciones entre los modelos
 Category.associate({ Product });
@@ -48,4 +50,5 @@ module.exports = {
   sequelize,
   Product,
   Category,
+  User,
 };
