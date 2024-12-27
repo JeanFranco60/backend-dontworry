@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const { Sequelize } = require("sequelize");
+const Admin = require("./Admin");
 const Category = require("./Category");
 const Product = require("./Product");
 const User = require("./User");
@@ -40,6 +41,8 @@ sequelize
   });
 
 // Inicialización de los modelos
+Admin.initModel(sequelize);
+
 Category.initModel(sequelize);
 Product.initModel(sequelize);
 User.initModel(sequelize);
@@ -53,4 +56,5 @@ module.exports = {
   Product,
   Category,
   User,
+  Admin,
 };
