@@ -1,27 +1,13 @@
-// const express = require("express");
-// const userController = require("../controllers/userController");
-// const router = express.Router();
-
-// const checkjwt = require("../middleware/checkJwt");
-// const isAdmin = require("../middleware/isAdmin");
-
-// router.post("/", userController.store);
-
-// router.use(checkjwt);
-
-// router.get("/:id", userController.show);
-// router.patch("/:id", userController.update);
-// router.delete("/:id", userController.destroy);
-
-// router.use(isAdmin);
-// router.get("/", userController.index);
-
-// module.exports = router;
-
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 
-router.post("/validate", userController.validateUser);
+// Rutas para obtener, crear, actualizar y eliminar usuarios
+router.get("/", userController.index); // Obtener todos los usuarios
+router.get("/:id", userController.show); // Obtener un usuario por ID
+router.post("/", userController.store); // Crear un nuevo usuario
+router.post("/validate", userController.validateUser); // Validar usuario (login)
+router.put("/:id", userController.update); // Actualizar un usuario
+router.delete("/:id", userController.destroy); // Eliminar un usuario
 
 module.exports = router;
