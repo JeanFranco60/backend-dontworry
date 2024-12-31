@@ -6,7 +6,6 @@ const adminSeeder = require("./adminSeeders");
 
 async function run() {
   try {
-    // Ejecutar los seeders en paralelo si no importa el orden
     await Promise.all([
       userSeeder(),
       categorySeeder(),

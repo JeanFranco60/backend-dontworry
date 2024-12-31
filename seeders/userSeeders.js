@@ -9,7 +9,7 @@ async function userSeeder() {
     email: "user@project.com",
     address: "michilandia",
     phone: 123456789,
-    password: 1234,
+    password: await bcrypt.hash("1234", 10),
   };
   const users = [];
   users.push(firstUser);
