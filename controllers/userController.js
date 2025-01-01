@@ -67,13 +67,11 @@ const userController = {
         return res.status(404).json({ error: "Usuario no encontrado." });
       }
 
-      // Validar la contraseña
       const isValid = await User.validatePassword(password, user.password);
       if (!isValid) {
         return res.status(401).json({ error: "Contraseña incorrecta." });
       }
 
-      // Respuesta exitosa
       res.status(200).json({ message: "Usuario validado con éxito." });
     } catch (error) {
       console.error("Error al validar usuario:", error);
