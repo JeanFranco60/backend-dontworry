@@ -10,8 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/users", userRoutes); // Prefijo para las rutas de usuarios
-
+app.use("/api/users", userRoutes);
 app.use(routes);
 
 app.listen(PORT, () => {
