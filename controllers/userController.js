@@ -1,37 +1,33 @@
 const { User } = require("../models");
 
 const userController = {
-  // Obtener todos los usuarios
   index: async (req, res) => {
     try {
-      const users = await User.findAll(); // Obtener todos los usuarios de la base de datos
-      res.status(200).json(users); // Devolver la lista de usuarios
+      const users = await User.findAll();
+      res.status(200).json(users);
     } catch (error) {
       console.error("Error al obtener usuarios:", error);
       res.status(500).json({ error: "Error interno del servidor." });
     }
   },
 
-  // Obtener un solo usuario por ID
   show: async (req, res) => {
-    const { id } = req.params; // Obtener el ID del usuario de los parámetros
+    const { id } = req.params;
     try {
-      const user = await User.findByPk(id); // Buscar el usuario por ID
+      const user = await User.findByPk(id);
       if (!user) {
         return res.status(404).json({ error: "Usuario no encontrado." });
       }
-      res.status(200).json(user); // Devolver el usuario encontrado
+      res.status(200).json(user);
     } catch (error) {
       console.error("Error al obtener el usuario:", error);
       res.status(500).json({ error: "Error interno del servidor." });
     }
   },
 
-  // Crear un nuevo usuario
   store: async (req, res) => {
-    const { email, password } = req.body; // Obtener el email y la contraseña del cuerpo de la solicitud
+    const { email, password } = req.body;
 
-    // Validaciones
     if (!email || !password) {
       return res
         .status(400)
@@ -39,20 +35,17 @@ const userController = {
     }
 
     try {
-      // Crear un nuevo usuario en la base de datos
       const newUser = await User.create({ email, password });
-      res.status(201).json(newUser); // Devolver el usuario creado
+      res.status(201).json(newUser);
     } catch (error) {
       console.error("Error al crear usuario:", error);
       res.status(400).json({ error: "Error al crear usuario." });
     }
   },
 
-  // Validar usuario (inicio de sesión)
   validateUser: async (req, res) => {
     const { email, password } = req.body;
 
-    // Validar que se envíen ambos campos
     if (!email || !password) {
       return res
         .status(400)
@@ -60,7 +53,6 @@ const userController = {
     }
 
     try {
-      // Buscar usuario por email
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
@@ -79,19 +71,15 @@ const userController = {
     }
   },
 
-  // Actualizar un usuario
   update: async (req, res) => {
-    const { id } = req.params; // Obtener el ID del usuario de los parámetros
-    const updates = req.body; // Obtener los datos de actualización del cuerpo de la solicitud
-
+    const { id } = req.params;
+    const updates = req.body;
     try {
-      const user = await User.findByPk(id); // Buscar el usuario por ID
+      const user = await User.findByPk(id);
 
       if (!user) {
         return res.status(404).json({ error: "Usuario no encontrado." });
       }
-
-      // Actualizar el usuario
       await user.update(updates);
       res.status(200).json({ message: "Usuario actualizado con éxito.", user });
     } catch (error) {
@@ -100,18 +88,15 @@ const userController = {
     }
   },
 
-  // Eliminar un usuario
   destroy: async (req, res) => {
-    const { id } = req.params; // Obtener el ID del usuario de los parámetros
+    const { id } = req.params;
 
     try {
-      const user = await User.findByPk(id); // Buscar el usuario por ID
-
+      const user = await User.findByPk(id);
       if (!user) {
         return res.status(404).json({ error: "Usuario no encontrado." });
       }
 
-      // Eliminar el usuario
       await user.destroy();
       res.status(200).json({ message: "Usuario eliminado con éxito." });
     } catch (error) {
