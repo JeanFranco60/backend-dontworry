@@ -1,24 +1,14 @@
-// const express = require("express");
-// const router = express.Router();
-// const authController = require("../controllers/authController");
-
-// // Ruta de login
-// router.post("/", authController.getToken);
-
-// module.exports = router;
-
-
 const express = require("express");
-const bcrypt = require("bcrypt"); // Por seguridad, para manejar contraseñas
-const jwt = require("jsonwebtoken"); // Para generar tokens JWT
-const { User } = require("../models"); // Tu modelo Sequelize
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { User } = require("../models");
 const router = express.Router();
 
 // Configuración de clave secreta
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "secret_key";
 
 // Endpoint de login
-router.post("/tokens", async (req, res) => {
+router.post("/users/validate", async (req, res) => {
   const { email, password } = req.body;
 
   try {

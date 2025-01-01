@@ -26,7 +26,7 @@ class User extends Model {
       {
         sequelize,
         modelName: "User",
-        tableName: "users",
+        tableName: "users", 
       }
     );
 
