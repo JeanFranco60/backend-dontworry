@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const bcrypt = require("bcrypt");
 
 const userController = {
   index: async (req, res) => {
@@ -34,12 +35,32 @@ const userController = {
         .json({ error: "Email y contraseña son requeridos." });
     }
 
+    // Validación de contraseña
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({
+        error:
+          "La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una letra minúscula, un número y un carácter especial.",
+      });
+    }
+
     try {
-      const newUser = await User.create({ email, password });
+      // Verificar si el usuario ya existe
+      const existingUser = await User.findOne({ where: { email } });
+      if (existingUser) {
+        return res.status(400).json({ error: "El correo ya está registrado." });
+      }
+
+      // Encriptar la contraseña
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Crear el nuevo usuario
+      const newUser = await User.create({ email, password: hashedPassword });
       res.status(201).json(newUser);
     } catch (error) {
       console.error("Error al crear usuario:", error);
-      res.status(400).json({ error: "Error al crear usuario." });
+      res.status(500).json({ error: "Error interno del servidor." });
     }
   },
 
@@ -59,7 +80,7 @@ const userController = {
         return res.status(404).json({ error: "Usuario no encontrado." });
       }
 
-      const isValid = await User.validatePassword(password, user.password);
+      const isValid = await bcrypt.compare(password, user.password);
       if (!isValid) {
         return res.status(401).json({ error: "Contraseña incorrecta." });
       }
