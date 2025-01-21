@@ -5,10 +5,13 @@ const categoryRoutes = require("./categoryRoutes");
 const userRoutes = require("./userRoutes");
 const authRoutes = require("./authRoutes");
 const adminRoutes = require("./adminRoutes");
+const orderRoutes = require("./orderRoutes");
 
 const stripeRoutes = require("./stripeRoutes");
 
 router.use("/admins", adminRoutes);
+router.use("/orders", orderRoutes);
+
 router.use("/products", productRoutes);
 router.use("/categories", categoryRoutes);
 router.use("/users", userRoutes);
