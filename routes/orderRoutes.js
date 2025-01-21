@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const orderController = require("../controllers/orderController");
-const isAdmin = require("../middlewares/isAdmin");
-const checkjwt = require("../middlewares/checkjwt");
+const isAdmin = require("../middleware/isAdmin");
+const checkjwt = require("../middleware/checkJwt");
 
 router.use(checkjwt);
+
 router.post("/", orderController.store);
 router.get("/myOrders", orderController.showMyOrders);
 router.use(isAdmin);
