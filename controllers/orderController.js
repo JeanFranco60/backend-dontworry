@@ -36,7 +36,7 @@ const orderController = {
     const customerId = req.auth.sub;
     try {
       const order = req.body;
-      //    order.products = JSON.parse(order.products);
+         order.products = JSON.parse(order.products);
       if (!order.address) throw new Error("error");
 
       for (const product of order.products) {
